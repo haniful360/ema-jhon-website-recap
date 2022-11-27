@@ -1,7 +1,7 @@
 .single-product {
     width: 300px;
     height: 510px;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border: 1px solid #95A0A7;
     border-radius: 8px;
     position: relative;
@@ -51,4 +51,12 @@
 }
 .btn-cart:hover{
     background-color:rgba(255, 166, 0, 0.742);
+}
+
+.btn-text{
+    margin-right: 5px;
+}
+.shopping-icon{
+    font-size: 15px;
+    
 }
