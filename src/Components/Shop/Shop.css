@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
-    margin: 108px auto;
+    margin: 208px auto;
 }
 
 /*cart container */
