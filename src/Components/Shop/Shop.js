@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoreCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Products/Products';
 import './Shop.css';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    // hook
+    const [products, setProducts] = useProducts();
     const [cart, setCart] = useState([]);
-    useEffect(() => {
-        console.log('product load before fetch');
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data)
-                console.log('product loadded');
-            })
-    }, [])
-
+   
+    // loacal storage data store
     useEffect(() => {
         const storedCart = getStoreCart();
-        console.log('local storage first line', products);
+        // console.log('local storage first line', products);
         const saveCart = [];
         for (const id in storedCart) {
             const addedProduct = products.find(product => product.id === id);
@@ -31,15 +25,26 @@ const Shop = () => {
             }
         }
         setCart(saveCart);
-        console.log('local storage finished');
+        // console.log('local storage finished');
     }, [products])
 
-    const handleAddToCart = (product) => {
+    const handleAddToCart = (selectedProduct) => {
         // console.log(product);
         // const newCart = cart.push(product);
-        const newCart = [...cart, product];
+        let newCart = []
+        const exists = cart.find(product => product.id === selectedProduct.id);
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct];
+        }
+        else {
+            const rest = cart.filter(product => product.id !== selectedProduct.id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+        // const newCart = [...cart, selectedProduct];
         setCart(newCart);
-        addToDb(product.id);
+        addToDb(selectedProduct.id);
     }
 
     return (
