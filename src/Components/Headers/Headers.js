@@ -11,10 +11,10 @@ const Headers = () => {
                 </div>
                 <div>
                     <ul className='munu-item' >
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/#">order</a></li>
-                        <li><a href="/#">order review</a></li>
-                        <li><a href="/#">manage inventory</a></li>
+                        <li><a href="/shop">shop</a></li>
+                        <li><a href="/orders">Orders</a></li>
+                        <li><a href="/inventory">inventory</a></li>
+                        <li><a href="/about">about</a></li>
                     </ul>
                 </div>
             </nav>
